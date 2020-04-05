@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using BlogEngine.Application.Exceptions;
 using BlogEngine.Domain.Entities;
@@ -25,6 +26,7 @@ namespace BlogEngine.Application.Comments
 
             var comment = new Comment
             {
+                Id = Guid.NewGuid().ToString(),
                 Author = request.Author,
                 Content = request.Content
             };

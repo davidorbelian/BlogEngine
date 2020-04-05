@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using BlogEngine.Domain.Entities;
 using MediatR;
@@ -21,6 +22,7 @@ namespace BlogEngine.Application.Articles
         {
             var article = new Article
             {
+                Id = Guid.NewGuid().ToString(),
                 Title = request.Title,
                 Content = request.Content
             };
