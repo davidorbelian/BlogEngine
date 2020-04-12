@@ -31,6 +31,20 @@ namespace BlogEngine.Presentation.Controllers
             return Ok(id);
         }
 
+        [HttpPut("{id}")]
+        [Authorize]
+        public async Task<IActionResult> Put(
+            string id,
+            [FromBody] PutBody body,
+            CancellationToken ct = default)
+        {
+            var command = new UpdateArticleCommand(id, body.Title, body.Content);
+            var newId = await _mediator.Send(command, ct);
+
+            // TODO: Replace newId with URI
+            return Ok(newId);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(
             string id,
@@ -53,6 +67,12 @@ namespace BlogEngine.Presentation.Controllers
         }
 
         public sealed class PostBody
+        {
+            public string Title { get; set; }
+            public string Content { get; set; }
+        }
+
+        public sealed class PutBody
         {
             public string Title { get; set; }
             public string Content { get; set; }
