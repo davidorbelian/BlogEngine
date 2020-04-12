@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using BlogEngine.Application.Articles;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogEngine.Presentation.Controllers
@@ -18,6 +19,7 @@ namespace BlogEngine.Presentation.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Post(
             [FromBody] PostBody body,
             CancellationToken ct = default)
