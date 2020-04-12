@@ -16,7 +16,7 @@ namespace BlogEngine.Application.Comments
         }
 
         public async Task<Unit> Handle(
-            DeleteCommentCommand request, 
+            DeleteCommentCommand request,
             CancellationToken cancellationToken)
         {
             var comment = await _context.Comments.FindAsync(request.Id) ??

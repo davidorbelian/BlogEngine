@@ -48,7 +48,7 @@ namespace BlogEngine.Presentation.Controllers
         [HttpDelete("{id}")]
         [Authorize]
         public async Task<IActionResult> Delete(
-            string id, 
+            string id,
             CancellationToken ct = default)
         {
             var command = new DeleteArticleCommand(id);
