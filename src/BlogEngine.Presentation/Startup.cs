@@ -12,8 +12,6 @@ namespace BlogEngine.Presentation
 {
     public sealed class Startup
     {
-        private const string DatabaseSection = "Database";
-
         public Startup(IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             Configuration = configuration;
@@ -23,18 +21,20 @@ namespace BlogEngine.Presentation
         public IConfiguration Configuration { get; }
         public IWebHostEnvironment WebHostEnvironment { get; }
 
-        public DatabaseConfiguration DatabaseConfiguration =>
-            Configuration.GetSection(DatabaseSection).Get<DatabaseConfiguration>();
+        public IConfigurationSection AuthSection => Configuration.GetSection("Auth");
+        public IConfigurationSection DatabaseSection => Configuration.GetSection("Database");
 
         public bool IsDevelopment => WebHostEnvironment.IsDevelopment();
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = DatabaseConfiguration.ConnectionString;
+            var connectionString = DatabaseSection.Get<DatabaseConfiguration>().ConnectionString;
 
             services.AddApplication();
             services.AddSqLiteInfrastructure(connectionString);
             services.AddPresentation();
+
+            services.ConfigureScoped<AuthConfiguration>(AuthSection);
         }
 
         public void Configure(IApplicationBuilder app)
