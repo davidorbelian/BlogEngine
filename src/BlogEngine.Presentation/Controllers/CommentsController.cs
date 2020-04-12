@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using BlogEngine.Application.Comments;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogEngine.Presentation.Controllers
@@ -28,6 +29,19 @@ namespace BlogEngine.Presentation.Controllers
 
             // TODO: Replace with Created(URI)
             return Ok(id);
+        }
+
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<IActionResult> Delete(
+            string id,
+            string articleId,
+            CancellationToken ct = default)
+        {
+            var command = new DeleteCommentCommand(id, articleId);
+            await _mediator.Send(command, ct);
+
+            return NoContent();
         }
 
         [HttpGet]
