@@ -45,6 +45,18 @@ namespace BlogEngine.Presentation.Controllers
             return Ok(newId);
         }
 
+        [HttpDelete("{id}")]
+        [Authorize]
+        public async Task<IActionResult> Delete(
+            string id, 
+            CancellationToken ct = default)
+        {
+            var command = new DeleteArticleCommand(id);
+            await _mediator.Send(command, ct);
+
+            return NoContent();
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(
             string id,
