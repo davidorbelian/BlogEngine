@@ -64,11 +64,57 @@ namespace BlogEngine.Infrastructure.Migrations
                 b.ToTable("Comments");
             });
 
+            modelBuilder.Entity("BlogEngine.Domain.Entities.HashTag", b =>
+            {
+                b.Property<string>("Id")
+                    .HasColumnType("TEXT");
+
+                b.Property<DateTime>("CreateTime")
+                    .HasColumnType("TEXT");
+
+                b.Property<DateTime>("UpdateTime")
+                    .HasColumnType("TEXT");
+
+                b.HasKey("Id");
+
+                b.ToTable("HashTags");
+            });
+
+            modelBuilder.Entity("BlogEngine.Domain.Relations.ArticleHashTag", b =>
+            {
+                b.Property<string>("ArticleId")
+                    .HasColumnType("TEXT");
+
+                b.Property<string>("HashTagId")
+                    .HasColumnType("TEXT");
+
+                b.HasKey("ArticleId", "HashTagId");
+
+                b.HasIndex("HashTagId");
+
+                b.ToTable("ArticleHashTag");
+            });
+
             modelBuilder.Entity("BlogEngine.Domain.Entities.Comment", b =>
             {
                 b.HasOne("BlogEngine.Domain.Entities.Article", "Article")
                     .WithMany("Comments")
                     .HasForeignKey("ArticleId");
+            });
+
+            modelBuilder.Entity("BlogEngine.Domain.Relations.ArticleHashTag", b =>
+            {
+                b.HasOne("BlogEngine.Domain.Entities.Article", "Article")
+                    .WithMany("HashTags")
+                    .HasForeignKey("ArticleId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
+
+                b.HasOne("BlogEngine.Domain.Entities.HashTag", "HashTag")
+                    .WithMany("Articles")
+                    .HasForeignKey("HashTagId")
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .IsRequired();
             });
 #pragma warning restore 612, 618
         }
