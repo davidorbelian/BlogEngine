@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using BlogEngine.Application.Abstractions;
@@ -9,20 +10,23 @@ using Microsoft.EntityFrameworkCore;
 namespace BlogEngine.Application.Articles
 {
     // ReSharper disable once UnusedMember.Global
-    public sealed class GetArticlesQueryHandler : IRequestHandler<GetArticlesQuery, IEnumerable<Article>>
+    public sealed class GetArticlesByHashTagQueryHandler
+        : IRequestHandler<GetArticlesByHashTagQuery, IEnumerable<Article>>
     {
         private readonly IBlogEngineContext _context;
 
-        public GetArticlesQueryHandler(IBlogEngineContext context)
+        public GetArticlesByHashTagQueryHandler(IBlogEngineContext context)
         {
             _context = context;
         }
 
         public async Task<IEnumerable<Article>> Handle(
-            GetArticlesQuery request,
+            GetArticlesByHashTagQuery request,
             CancellationToken cancellationToken)
         {
-            return await _context.Articles.ToListAsync(cancellationToken);
+            return await _context.Articles
+                .Where(a => a.HashTags.Any(ht => ht.HashTagId.ToLower() == request.HashTag.ToLower()))
+                .ToListAsync(cancellationToken);
         }
     }
 }
