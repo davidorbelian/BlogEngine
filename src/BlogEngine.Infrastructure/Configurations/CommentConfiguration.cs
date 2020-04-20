@@ -6,8 +6,6 @@ namespace BlogEngine.Infrastructure.Configurations
 {
     public sealed class CommentConfiguration : IEntityTypeConfiguration<Comment>
     {
-        public void Configure(EntityTypeBuilder<Comment> builder)
-        {
-        }
+        public void Configure(EntityTypeBuilder<Comment> builder) { }
     }
 }

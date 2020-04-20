@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace BlogEngine.Infrastructure.Configurations
 {
-    public sealed class ArticleConfiguration : IEntityTypeConfiguration<Article>
+    public sealed class HashTagConfiguration : IEntityTypeConfiguration<HashTag>
     {
-        public void Configure(EntityTypeBuilder<Article> builder) { }
+        public void Configure(EntityTypeBuilder<HashTag> builder) { }
     }
 }

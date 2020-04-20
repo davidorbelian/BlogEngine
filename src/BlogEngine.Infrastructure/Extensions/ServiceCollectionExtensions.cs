@@ -1,4 +1,4 @@
-﻿using BlogEngine.Application;
+﻿using BlogEngine.Application.Abstractions;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BlogEngine.Infrastructure.Extensions
