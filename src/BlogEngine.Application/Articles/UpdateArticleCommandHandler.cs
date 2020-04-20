@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 using BlogEngine.Application.Abstractions;
 using BlogEngine.Application.Exceptions;
@@ -33,6 +34,7 @@ namespace BlogEngine.Application.Articles
 
             article.Title = request.Title;
             article.Content = request.Content;
+            article.UpdateTime = DateTime.UtcNow;
 
             article.HashTags.Clear();
 
