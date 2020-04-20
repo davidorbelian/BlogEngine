@@ -6,8 +6,6 @@ namespace BlogEngine.Infrastructure.Configurations
 {
     public sealed class ArticleConfiguration : IEntityTypeConfiguration<Article>
     {
-        public void Configure(EntityTypeBuilder<Article> builder)
-        {
-        }
+        public void Configure(EntityTypeBuilder<Article> builder) { }
     }
 }

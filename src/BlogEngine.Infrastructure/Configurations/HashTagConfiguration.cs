@@ -6,8 +6,6 @@ namespace BlogEngine.Infrastructure.Configurations
 {
     public sealed class HashTagConfiguration : IEntityTypeConfiguration<HashTag>
     {
-        public void Configure(EntityTypeBuilder<HashTag> builder)
-        {
-        }
+        public void Configure(EntityTypeBuilder<HashTag> builder) { }
     }
 }

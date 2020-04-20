@@ -7,9 +7,7 @@ namespace BlogEngine.Infrastructure
 {
     public sealed class BlogEngineContext : DbContext, IBlogEngineContext
     {
-        public BlogEngineContext(DbContextOptions<BlogEngineContext> options) : base(options)
-        {
-        }
+        public BlogEngineContext(DbContextOptions<BlogEngineContext> options) : base(options) { }
 
         public DbSet<Article> Articles { get; set; }
         public DbSet<Comment> Comments { get; set; }
