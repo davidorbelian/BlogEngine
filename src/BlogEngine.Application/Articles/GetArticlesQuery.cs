@@ -4,5 +4,5 @@ using MediatR;
 
 namespace BlogEngine.Application.Articles
 {
-    public sealed class GetArticlesQuery : IRequest<IEnumerable<Article>> { }
+    public sealed record GetArticlesQuery : IRequest<IEnumerable<Article>>;
 }

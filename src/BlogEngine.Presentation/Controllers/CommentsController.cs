@@ -24,7 +24,8 @@ namespace BlogEngine.Presentation.Controllers
             [FromBody] PostBody body,
             CancellationToken ct = default)
         {
-            var command = new CreateCommentCommand(body.Author, body.Content, articleId);
+            var (author, content) = body;
+            var command = new CreateCommentCommand(author, content, articleId);
             var id = await _mediator.Send(command, ct);
 
             // TODO: Replace with Created(URI)
@@ -55,10 +56,6 @@ namespace BlogEngine.Presentation.Controllers
             return Ok(comments);
         }
 
-        public sealed class PostBody
-        {
-            public string Author { get; set; }
-            public string Content { get; set; }
-        }
+        public sealed record PostBody(string Author, string Content);
     }
 }

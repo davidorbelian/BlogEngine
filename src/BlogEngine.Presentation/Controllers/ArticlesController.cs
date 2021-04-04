@@ -24,7 +24,8 @@ namespace BlogEngine.Presentation.Controllers
             [FromBody] PostBody body,
             CancellationToken ct = default)
         {
-            var command = new CreateArticleCommand(body.Title, body.Content);
+            var (title, content) = body;
+            var command = new CreateArticleCommand(title, content);
             var id = await _mediator.Send(command, ct);
 
             // TODO: Replace with Created(URI)
@@ -38,7 +39,8 @@ namespace BlogEngine.Presentation.Controllers
             [FromBody] PutBody body,
             CancellationToken ct = default)
         {
-            var command = new UpdateArticleCommand(id, body.Title, body.Content);
+            var (title, content) = body;
+            var command = new UpdateArticleCommand(id, title, content);
             var newId = await _mediator.Send(command, ct);
 
             // TODO: Replace newId with URI
@@ -78,16 +80,7 @@ namespace BlogEngine.Presentation.Controllers
             return Ok(articles);
         }
 
-        public sealed class PostBody
-        {
-            public string Title { get; set; }
-            public string Content { get; set; }
-        }
-
-        public sealed class PutBody
-        {
-            public string Title { get; set; }
-            public string Content { get; set; }
-        }
+        public sealed record PostBody(string Title, string Content);
+        public sealed record PutBody(string Title, string Content);
     }
 }

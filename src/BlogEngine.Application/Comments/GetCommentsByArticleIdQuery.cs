@@ -4,13 +4,5 @@ using MediatR;
 
 namespace BlogEngine.Application.Comments
 {
-    public sealed class GetCommentsByArticleIdQuery : IRequest<IEnumerable<Comment>>
-    {
-        public GetCommentsByArticleIdQuery(string articleId)
-        {
-            ArticleId = articleId;
-        }
-
-        public string ArticleId { get; }
-    }
+    public sealed record GetCommentsByArticleIdQuery(string ArticleId) : IRequest<IEnumerable<Comment>>;
 }

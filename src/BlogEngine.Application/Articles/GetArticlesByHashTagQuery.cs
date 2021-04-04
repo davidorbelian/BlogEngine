@@ -4,13 +4,5 @@ using MediatR;
 
 namespace BlogEngine.Application.Articles
 {
-    public sealed class GetArticlesByHashTagQuery : IRequest<IEnumerable<Article>>
-    {
-        public GetArticlesByHashTagQuery(string hashTag)
-        {
-            HashTag = hashTag;
-        }
-
-        public string HashTag { get; }
-    }
+    public sealed record GetArticlesByHashTagQuery(string HashTag) : IRequest<IEnumerable<Article>>;
 }
