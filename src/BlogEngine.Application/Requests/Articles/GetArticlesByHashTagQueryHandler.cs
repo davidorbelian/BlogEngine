@@ -27,6 +27,7 @@ namespace BlogEngine.Application.Requests.Articles
         {
             return await _context.Articles
                 .Where(a => a.HashTags.Any(ht => ht.HashTagId.ToLower() == request.HashTag.ToLower()))
+                .Include(a => a.HashTags)
                 .ToListAsync(cancellationToken);
         }
     }

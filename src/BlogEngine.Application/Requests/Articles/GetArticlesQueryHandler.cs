@@ -23,7 +23,9 @@ namespace BlogEngine.Application.Requests.Articles
             GetArticlesQuery request,
             CancellationToken cancellationToken)
         {
-            return await _context.Articles.ToListAsync(cancellationToken);
+            return await _context.Articles
+                .Include(a => a.HashTags)
+                .ToListAsync(cancellationToken);
         }
     }
 }
