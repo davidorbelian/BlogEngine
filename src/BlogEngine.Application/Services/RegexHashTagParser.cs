@@ -12,7 +12,6 @@ namespace BlogEngine.Application.Services
         public IEnumerable<string> Parse(string text)
         {
             return Regex.Matches(text, RegexPattern)
-                .Cast<Match>()
                 .Select(m => m.Groups[1].Value);
         }
     }

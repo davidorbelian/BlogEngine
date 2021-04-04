@@ -1,32 +1,23 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using BlogEngine.API.Core;
 using BlogEngine.Application.Comments;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BlogEngine.Presentation.Controllers
+namespace BlogEngine.API.Controllers
 {
-    [ApiController]
     [Route("api/articles/{articleId}/comments")]
-    public sealed class CommentsController : ControllerBase
+    public sealed class CommentsController : ApiController
     {
-        private readonly IMediator _mediator;
-
-        public CommentsController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpPost]
         public async Task<IActionResult> Post(
             string articleId,
-            [FromBody] PostBody body,
+            [FromBody] CommentPostBody body,
             CancellationToken ct = default)
         {
-            var (author, content) = body;
-            var command = new CreateCommentCommand(author, content, articleId);
-            var id = await _mediator.Send(command, ct);
+            var command = new CreateCommentCommand(body.Author, body.Content, articleId);
+            var id = await Mediator.Send(command, ct);
 
             // TODO: Replace with Created(URI)
             return Ok(id);
@@ -40,7 +31,7 @@ namespace BlogEngine.Presentation.Controllers
             CancellationToken ct = default)
         {
             var command = new DeleteCommentCommand(id, articleId);
-            await _mediator.Send(command, ct);
+            await Mediator.Send(command, ct);
 
             return NoContent();
         }
@@ -51,11 +42,11 @@ namespace BlogEngine.Presentation.Controllers
             CancellationToken ct = default)
         {
             var query = new GetCommentsByArticleIdQuery(articleId);
-            var comments = await _mediator.Send(query, ct);
+            var comments = await Mediator.Send(query, ct);
 
             return Ok(comments);
         }
 
-        public sealed record PostBody(string Author, string Content);
+        public sealed record CommentPostBody(string Author, string Content);
     }
 }

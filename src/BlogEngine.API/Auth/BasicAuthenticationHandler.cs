@@ -4,12 +4,12 @@ using System.Security.Claims;
 using System.Text;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
-using BlogEngine.Presentation.Configurations;
+using BlogEngine.API.Configurations;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace BlogEngine.Presentation.Auth
+namespace BlogEngine.API.Auth
 {
     public sealed class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {

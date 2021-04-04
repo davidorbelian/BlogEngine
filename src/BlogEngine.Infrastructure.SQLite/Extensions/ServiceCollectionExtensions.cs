@@ -6,7 +6,8 @@ namespace BlogEngine.Infrastructure.SQLite.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static IServiceCollection AddSqLiteInfrastructure(this IServiceCollection services,
+        public static IServiceCollection AddSqLiteInfrastructure(
+            this IServiceCollection services,
             string connectionString)
         {
             services.AddInfrastructure();

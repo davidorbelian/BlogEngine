@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace BlogEngine.Presentation
+namespace BlogEngine.API
 {
-    public sealed class Program
+    public class Program
     {
         public static void Main(string[] args)
         {

@@ -1,14 +1,14 @@
+using BlogEngine.API.Configurations;
+using BlogEngine.API.Extensions;
 using BlogEngine.Application.Extensions;
 using BlogEngine.Infrastructure.SQLite.Extensions;
-using BlogEngine.Presentation.Configurations;
-using BlogEngine.Presentation.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 
-namespace BlogEngine.Presentation
+namespace BlogEngine.API
 {
     public sealed class Startup
     {
@@ -32,7 +32,7 @@ namespace BlogEngine.Presentation
 
             services.AddApplication();
             services.AddSqLiteInfrastructure(connectionString);
-            services.AddPresentation();
+            services.AddApi();
 
             services.ConfigureScoped<AuthConfiguration>(AuthSection);
         }
@@ -44,7 +44,7 @@ namespace BlogEngine.Presentation
             else
                 app.UseProductionPipeline();
 
-            app.UsePresentationPipeline();
+            app.UseApiPipeline();
         }
     }
 }

@@ -1,32 +1,23 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
+using BlogEngine.API.Core;
 using BlogEngine.Application.Articles;
-using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BlogEngine.Presentation.Controllers
+namespace BlogEngine.API.Controllers
 {
-    [ApiController]
     [Route("api/articles")]
-    public sealed class ArticlesController : ControllerBase
+    public sealed class ArticlesController : ApiController
     {
-        private readonly IMediator _mediator;
-
-        public ArticlesController(IMediator mediator)
-        {
-            _mediator = mediator;
-        }
-
         [HttpPost]
         [Authorize]
         public async Task<IActionResult> Post(
-            [FromBody] PostBody body,
+            [FromBody] ArticlePostBody body,
             CancellationToken ct = default)
         {
-            var (title, content) = body;
-            var command = new CreateArticleCommand(title, content);
-            var id = await _mediator.Send(command, ct);
+            var command = new CreateArticleCommand(body.Title, body.Content);
+            var id = await Mediator.Send(command, ct);
 
             // TODO: Replace with Created(URI)
             return Ok(id);
@@ -36,12 +27,11 @@ namespace BlogEngine.Presentation.Controllers
         [Authorize]
         public async Task<IActionResult> Put(
             string id,
-            [FromBody] PutBody body,
+            [FromBody] ArticlePutBody body,
             CancellationToken ct = default)
         {
-            var (title, content) = body;
-            var command = new UpdateArticleCommand(id, title, content);
-            var newId = await _mediator.Send(command, ct);
+            var command = new UpdateArticleCommand(id, body.Title, body.Content);
+            var newId = await Mediator.Send(command, ct);
 
             // TODO: Replace newId with URI
             return Ok(newId);
@@ -54,7 +44,7 @@ namespace BlogEngine.Presentation.Controllers
             CancellationToken ct = default)
         {
             var command = new DeleteArticleCommand(id);
-            await _mediator.Send(command, ct);
+            await Mediator.Send(command, ct);
 
             return NoContent();
         }
@@ -65,7 +55,7 @@ namespace BlogEngine.Presentation.Controllers
             CancellationToken ct = default)
         {
             var query = new GetArticleByIdQuery(id);
-            var article = await _mediator.Send(query, ct);
+            var article = await Mediator.Send(query, ct);
 
             return Ok(article);
         }
@@ -75,12 +65,13 @@ namespace BlogEngine.Presentation.Controllers
             CancellationToken ct = default)
         {
             var query = new GetArticlesQuery();
-            var articles = await _mediator.Send(query, ct);
+            var articles = await Mediator.Send(query, ct);
 
             return Ok(articles);
         }
 
-        public sealed record PostBody(string Title, string Content);
-        public sealed record PutBody(string Title, string Content);
+        public sealed record ArticlePostBody(string Title, string Content);
+
+        public sealed record ArticlePutBody(string Title, string Content);
     }
 }

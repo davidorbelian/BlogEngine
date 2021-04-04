@@ -6,7 +6,7 @@ namespace BlogEngine.Application.Tests
 {
     public sealed class RegexHashTagParserTests
     {
-        private static RegexHashTagParser HashTagParser => new RegexHashTagParser();
+        private static RegexHashTagParser HashTagParser => new();
 
         [Fact]
         public void ParseMultiple()

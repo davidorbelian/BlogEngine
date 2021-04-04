@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Builder;
 
-namespace BlogEngine.Presentation.Extensions
+namespace BlogEngine.API.Extensions
 {
     public static class ApplicationBuilderExtensions
     {
         public static IApplicationBuilder UseDevelopmentPipeline(this IApplicationBuilder app)
         {
             return app
-                .UseDeveloperExceptionPage();
+                .UseDeveloperExceptionPage()
+                .UseSwagger()
+                .UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "BlogEngine API"));
         }
 
         public static IApplicationBuilder UseProductionPipeline(this IApplicationBuilder app)
@@ -16,7 +18,7 @@ namespace BlogEngine.Presentation.Extensions
                 .UseHttpsRedirection();
         }
 
-        public static IApplicationBuilder UsePresentationPipeline(this IApplicationBuilder app)
+        public static IApplicationBuilder UseApiPipeline(this IApplicationBuilder app)
         {
             return app
                 .UseRouting()

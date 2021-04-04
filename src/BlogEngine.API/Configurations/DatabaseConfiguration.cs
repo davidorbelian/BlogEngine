@@ -1,4 +1,4 @@
-﻿namespace BlogEngine.Presentation.Configurations
+﻿namespace BlogEngine.API.Configurations
 {
     public sealed class DatabaseConfiguration
     {
