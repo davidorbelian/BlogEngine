@@ -7,7 +7,7 @@ using BlogEngine.Domain.Entities;
 using JetBrains.Annotations;
 using MediatR;
 
-namespace BlogEngine.Application.Comments
+namespace BlogEngine.Application.Requests.Comments
 {
     [UsedImplicitly]
     public sealed class CreateCommentCommandHandler : IRequestHandler<CreateCommentCommand, string>

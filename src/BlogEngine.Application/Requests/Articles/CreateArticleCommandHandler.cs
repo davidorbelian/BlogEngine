@@ -7,7 +7,7 @@ using BlogEngine.Domain.Relations;
 using JetBrains.Annotations;
 using MediatR;
 
-namespace BlogEngine.Application.Articles
+namespace BlogEngine.Application.Requests.Articles
 {
     [UsedImplicitly]
     public sealed class CreateArticleCommandHandler : IRequestHandler<CreateArticleCommand, string>

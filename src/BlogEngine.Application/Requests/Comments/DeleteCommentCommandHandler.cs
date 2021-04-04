@@ -5,7 +5,7 @@ using BlogEngine.Application.Exceptions;
 using JetBrains.Annotations;
 using MediatR;
 
-namespace BlogEngine.Application.Comments
+namespace BlogEngine.Application.Requests.Comments
 {
     [UsedImplicitly]
     public sealed class DeleteCommentCommandHandler : IRequestHandler<DeleteCommentCommand>

@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using BlogEngine.API.Core;
-using BlogEngine.Application.Articles;
+using BlogEngine.Application.Requests.Articles;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BlogEngine.API.Controllers

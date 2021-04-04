@@ -6,7 +6,7 @@ using BlogEngine.Domain.Entities;
 using JetBrains.Annotations;
 using MediatR;
 
-namespace BlogEngine.Application.Articles
+namespace BlogEngine.Application.Requests.Articles
 {
     [UsedImplicitly]
     public sealed class GetArticleByIdQueryHandler : IRequestHandler<GetArticleByIdQuery, Article>

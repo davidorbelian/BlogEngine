@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 using BlogEngine.Application.Abstractions;
 using BlogEngine.Application.Exceptions;
 using BlogEngine.Domain.Entities;
+using JetBrains.Annotations;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-// ReSharper disable UnusedMember.Global
-namespace BlogEngine.Application.Comments
+namespace BlogEngine.Application.Requests.Comments
 {
+    [UsedImplicitly]
     public sealed class GetCommentsByArticleIdQueryHandler
         : IRequestHandler<GetCommentsByArticleIdQuery, IEnumerable<Comment>>
     {

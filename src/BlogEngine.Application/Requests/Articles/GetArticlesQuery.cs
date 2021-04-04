@@ -2,7 +2,7 @@
 using BlogEngine.Domain.Entities;
 using MediatR;
 
-namespace BlogEngine.Application.Articles
+namespace BlogEngine.Application.Requests.Articles
 {
     public sealed record GetArticlesQuery : IRequest<IEnumerable<Article>>;
 }

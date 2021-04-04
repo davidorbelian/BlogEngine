@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using BlogEngine.API.Core;
-using BlogEngine.Application.Comments;
+using BlogEngine.Application.Requests.Comments;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

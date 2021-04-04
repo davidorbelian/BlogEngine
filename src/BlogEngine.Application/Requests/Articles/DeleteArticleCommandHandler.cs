@@ -7,7 +7,7 @@ using JetBrains.Annotations;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
-namespace BlogEngine.Application.Articles
+namespace BlogEngine.Application.Requests.Articles
 {
     [UsedImplicitly]
     public sealed class DeleteArticleCommandHandler : IRequestHandler<DeleteArticleCommand>
