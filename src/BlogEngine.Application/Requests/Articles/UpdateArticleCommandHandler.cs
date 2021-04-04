@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore;
 namespace BlogEngine.Application.Requests.Articles
 {
     [UsedImplicitly]
-    public sealed class UpdateArticleCommandHandler : IRequestHandler<UpdateArticleCommand, string>
+    public sealed class UpdateArticleCommandHandler : IRequestHandler<UpdateArticleCommand>
     {
         private readonly IBlogEngineContext _context;
         private readonly IHashTagParser _hashTagParser;
@@ -24,7 +24,7 @@ namespace BlogEngine.Application.Requests.Articles
             _hashTagParser = hashTagParser;
         }
 
-        public async Task<string> Handle(
+        public async Task<Unit> Handle(
             UpdateArticleCommand request,
             CancellationToken cancellationToken)
         {
@@ -49,7 +49,7 @@ namespace BlogEngine.Application.Requests.Articles
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return article.Id;
+            return Unit.Value;
         }
     }
 }

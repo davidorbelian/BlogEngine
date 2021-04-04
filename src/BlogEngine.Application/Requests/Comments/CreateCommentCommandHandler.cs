@@ -10,7 +10,7 @@ using MediatR;
 namespace BlogEngine.Application.Requests.Comments
 {
     [UsedImplicitly]
-    public sealed class CreateCommentCommandHandler : IRequestHandler<CreateCommentCommand, string>
+    public sealed class CreateCommentCommandHandler : IRequestHandler<CreateCommentCommand, Comment>
     {
         private readonly IBlogEngineContext _context;
 
@@ -19,7 +19,7 @@ namespace BlogEngine.Application.Requests.Comments
             _context = context;
         }
 
-        public async Task<string> Handle(
+        public async Task<Comment> Handle(
             CreateCommentCommand request,
             CancellationToken cancellationToken)
         {
@@ -36,7 +36,7 @@ namespace BlogEngine.Application.Requests.Comments
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return comment.Id;
+            return comment;
         }
     }
 }

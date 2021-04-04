@@ -17,10 +17,9 @@ namespace BlogEngine.API.Controllers
             CancellationToken ct = default)
         {
             var command = new CreateArticleCommand(body.Title, body.Content);
-            var id = await Mediator.Send(command, ct);
+            var article = await Mediator.Send(command, ct);
 
-            // TODO: Replace with Created(URI)
-            return Ok(id);
+            return Created($"api/articles/{article.Id}", article);
         }
 
         [HttpPut("{id}")]
@@ -31,10 +30,9 @@ namespace BlogEngine.API.Controllers
             CancellationToken ct = default)
         {
             var command = new UpdateArticleCommand(id, body.Title, body.Content);
-            var newId = await Mediator.Send(command, ct);
+            await Mediator.Send(command, ct);
 
-            // TODO: Replace newId with URI
-            return Ok(newId);
+            return NoContent();
         }
 
         [HttpDelete("{id}")]

@@ -10,7 +10,7 @@ using MediatR;
 namespace BlogEngine.Application.Requests.Articles
 {
     [UsedImplicitly]
-    public sealed class CreateArticleCommandHandler : IRequestHandler<CreateArticleCommand, string>
+    public sealed class CreateArticleCommandHandler : IRequestHandler<CreateArticleCommand, Article>
     {
         private readonly IBlogEngineContext _context;
         private readonly IHashTagParser _hashTagParser;
@@ -23,7 +23,7 @@ namespace BlogEngine.Application.Requests.Articles
             _hashTagParser = hashTagParser;
         }
 
-        public async Task<string> Handle(
+        public async Task<Article> Handle(
             CreateArticleCommand request,
             CancellationToken cancellationToken)
         {
@@ -48,7 +48,7 @@ namespace BlogEngine.Application.Requests.Articles
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            return article.Id;
+            return article;
         }
     }
 }

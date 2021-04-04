@@ -17,10 +17,9 @@ namespace BlogEngine.API.Controllers
             CancellationToken ct = default)
         {
             var command = new CreateCommentCommand(body.Author, body.Content, articleId);
-            var id = await Mediator.Send(command, ct);
+            var comment = await Mediator.Send(command, ct);
 
-            // TODO: Replace with Created(URI)
-            return Ok(id);
+            return Created($"api/articles/{articleId}/comments/{comment.Id}", comment);
         }
 
         [HttpDelete("{id}")]
@@ -34,6 +33,18 @@ namespace BlogEngine.API.Controllers
             await Mediator.Send(command, ct);
 
             return NoContent();
+        }
+        
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(
+            string articleId,
+            string id,
+            CancellationToken ct = default)
+        {
+            var query = new GetCommentByIdAndArticleIdQuery(id, articleId);
+            var comment = await Mediator.Send(query, ct);
+
+            return Ok(comment);
         }
 
         [HttpGet]

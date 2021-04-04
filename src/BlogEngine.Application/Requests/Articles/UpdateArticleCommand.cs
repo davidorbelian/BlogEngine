@@ -2,5 +2,5 @@
 
 namespace BlogEngine.Application.Requests.Articles
 {
-    public sealed record UpdateArticleCommand(string Id, string Title, string Content) : IRequest<string>;
+    public sealed record UpdateArticleCommand(string Id, string Title, string Content) : IRequest;
 }
