@@ -4,11 +4,12 @@ using System.Threading.Tasks;
 using BlogEngine.Application.Abstractions;
 using BlogEngine.Domain.Entities;
 using BlogEngine.Domain.Relations;
+using JetBrains.Annotations;
 using MediatR;
 
 namespace BlogEngine.Application.Articles
 {
-    // ReSharper disable once UnusedMember.Global
+    [UsedImplicitly]
     public sealed class CreateArticleCommandHandler : IRequestHandler<CreateArticleCommand, string>
     {
         private readonly IBlogEngineContext _context;

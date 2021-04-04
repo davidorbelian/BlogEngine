@@ -3,12 +3,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using BlogEngine.Application.Abstractions;
 using BlogEngine.Application.Exceptions;
+using JetBrains.Annotations;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogEngine.Application.Articles
 {
-    // ReSharper disable once UnusedMember.Global
+    [UsedImplicitly]
     public sealed class DeleteArticleCommandHandler : IRequestHandler<DeleteArticleCommand>
     {
         private readonly IBlogEngineContext _context;

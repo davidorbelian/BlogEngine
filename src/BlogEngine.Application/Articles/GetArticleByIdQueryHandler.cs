@@ -3,11 +3,12 @@ using System.Threading.Tasks;
 using BlogEngine.Application.Abstractions;
 using BlogEngine.Application.Exceptions;
 using BlogEngine.Domain.Entities;
+using JetBrains.Annotations;
 using MediatR;
 
 namespace BlogEngine.Application.Articles
 {
-    // ReSharper disable once UnusedMember.Global
+    [UsedImplicitly]
     public sealed class GetArticleByIdQueryHandler : IRequestHandler<GetArticleByIdQuery, Article>
     {
         private readonly IBlogEngineContext _context;

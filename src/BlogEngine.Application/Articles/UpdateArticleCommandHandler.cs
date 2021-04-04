@@ -4,12 +4,13 @@ using System.Threading.Tasks;
 using BlogEngine.Application.Abstractions;
 using BlogEngine.Application.Exceptions;
 using BlogEngine.Domain.Relations;
+using JetBrains.Annotations;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogEngine.Application.Articles
 {
-    // ReSharper disable once UnusedMember.Global
+    [UsedImplicitly]
     public sealed class UpdateArticleCommandHandler : IRequestHandler<UpdateArticleCommand, string>
     {
         private readonly IBlogEngineContext _context;

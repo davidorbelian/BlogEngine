@@ -2,11 +2,12 @@
 using System.Threading.Tasks;
 using BlogEngine.Application.Abstractions;
 using BlogEngine.Application.Exceptions;
+using JetBrains.Annotations;
 using MediatR;
 
 namespace BlogEngine.Application.Comments
 {
-    // ReSharper disable once UnusedMember.Global
+    [UsedImplicitly]
     public sealed class DeleteCommentCommandHandler : IRequestHandler<DeleteCommentCommand>
     {
         private readonly IBlogEngineContext _context;

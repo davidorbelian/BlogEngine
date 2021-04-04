@@ -4,12 +4,13 @@ using System.Threading;
 using System.Threading.Tasks;
 using BlogEngine.Application.Abstractions;
 using BlogEngine.Domain.Entities;
+using JetBrains.Annotations;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogEngine.Application.Articles
 {
-    // ReSharper disable once UnusedMember.Global
+    [UsedImplicitly]
     public sealed class GetArticlesByHashTagQueryHandler
         : IRequestHandler<GetArticlesByHashTagQuery, IEnumerable<Article>>
     {

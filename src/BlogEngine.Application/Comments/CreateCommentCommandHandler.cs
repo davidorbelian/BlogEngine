@@ -4,11 +4,12 @@ using System.Threading.Tasks;
 using BlogEngine.Application.Abstractions;
 using BlogEngine.Application.Exceptions;
 using BlogEngine.Domain.Entities;
+using JetBrains.Annotations;
 using MediatR;
 
 namespace BlogEngine.Application.Comments
 {
-    // ReSharper disable once UnusedMember.Global
+    [UsedImplicitly]
     public sealed class CreateCommentCommandHandler : IRequestHandler<CreateCommentCommand, string>
     {
         private readonly IBlogEngineContext _context;
