@@ -9,12 +9,12 @@ namespace BlogEngine.API.Controllers
     [Route("api/hashtags")]
     public sealed class HashTagsController : ApiController
     {
-        [HttpGet("{hashTag}/articles")]
+        [HttpGet("{id}/articles")]
         public async Task<IActionResult> Get(
-            string hashTag,
+            string id,
             CancellationToken ct = default)
         {
-            var query = new GetArticlesByHashTagQuery(hashTag);
+            var query = new GetArticlesByHashTagIdQuery(id);
             var articles = await Mediator.Send(query, ct);
 
             return Ok(articles);

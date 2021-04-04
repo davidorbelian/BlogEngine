@@ -4,5 +4,5 @@ using MediatR;
 
 namespace BlogEngine.Application.Requests.Articles
 {
-    public sealed record GetArticlesByHashTagQuery(string HashTag) : IRequest<IEnumerable<Article>>;
+    public sealed record GetArticlesByHashTagIdQuery(string HashTagId) : IRequest<IEnumerable<Article>>;
 }

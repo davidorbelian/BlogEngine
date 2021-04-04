@@ -12,7 +12,7 @@ namespace BlogEngine.Application.Requests.Articles
 {
     [UsedImplicitly]
     public sealed class GetArticlesByHashTagQueryHandler
-        : IRequestHandler<GetArticlesByHashTagQuery, IEnumerable<Article>>
+        : IRequestHandler<GetArticlesByHashTagIdQuery, IEnumerable<Article>>
     {
         private readonly IBlogEngineContext _context;
 
@@ -22,11 +22,11 @@ namespace BlogEngine.Application.Requests.Articles
         }
 
         public async Task<IEnumerable<Article>> Handle(
-            GetArticlesByHashTagQuery request,
+            GetArticlesByHashTagIdQuery request,
             CancellationToken cancellationToken)
         {
             return await _context.Articles
-                .Where(a => a.HashTags.Any(ht => ht.HashTagId.ToLower() == request.HashTag.ToLower()))
+                .Where(a => a.HashTags.Any(ht => ht.HashTagId.ToLower() == request.HashTagId.ToLower()))
                 .Include(a => a.HashTags)
                 .ToListAsync(cancellationToken);
         }
