@@ -1,10 +1,11 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 using BlogEngine.Application.Abstractions;
-using BlogEngine.Application.Exceptions;
+using BlogEngine.Application.Extensions;
 using BlogEngine.Domain.Entities;
 using JetBrains.Annotations;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogEngine.Application.Requests.Articles
 {
@@ -22,8 +23,10 @@ namespace BlogEngine.Application.Requests.Articles
             GetArticleByIdQuery request,
             CancellationToken cancellationToken)
         {
-            return await _context.Articles.FindAsync(request.Id) ??
-                   throw new ArticleNotFoundException(request.Id);
+            return await _context.Articles
+                .Include(a => a.Comments)
+                .Include(a => a.HashTags)
+                .SingleOrNotFoundExceptionAsync(request.Id, cancellationToken);
         }
     }
 }

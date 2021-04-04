@@ -27,7 +27,7 @@ namespace BlogEngine.Application.Requests.Comments
             CancellationToken cancellationToken)
         {
             if (!await _context.Articles.AnyAsync(a => a.Id == request.ArticleId, cancellationToken))
-                throw new ArticleNotFoundException(request.ArticleId);
+                throw new EntityNotFoundException<Article>(request.ArticleId);
 
             return await _context.Comments.Where(c => c.ArticleId == request.ArticleId).ToListAsync(cancellationToken);
         }

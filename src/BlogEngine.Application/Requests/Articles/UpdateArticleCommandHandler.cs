@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using BlogEngine.Application.Abstractions;
-using BlogEngine.Application.Exceptions;
+using BlogEngine.Application.Extensions;
 using BlogEngine.Domain.Relations;
 using JetBrains.Annotations;
 using MediatR;
@@ -29,9 +29,8 @@ namespace BlogEngine.Application.Requests.Articles
             CancellationToken cancellationToken)
         {
             var article = await _context.Articles
-                              .Include(a => a.HashTags)
-                              .SingleOrDefaultAsync(a => a.Id == request.Id, cancellationToken) ??
-                          throw new ArticleNotFoundException(request.Id);
+                .Include(a => a.HashTags)
+                .SingleOrNotFoundExceptionAsync(request.Id, cancellationToken);
 
             article.Title = request.Title;
             article.Content = request.Content;

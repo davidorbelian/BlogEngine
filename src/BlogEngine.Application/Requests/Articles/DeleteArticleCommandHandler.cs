@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using BlogEngine.Application.Abstractions;
-using BlogEngine.Application.Exceptions;
+using BlogEngine.Application.Extensions;
 using JetBrains.Annotations;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
@@ -23,8 +23,7 @@ namespace BlogEngine.Application.Requests.Articles
             DeleteArticleCommand request,
             CancellationToken cancellationToken)
         {
-            var article = await _context.Articles.FindAsync(request.Id) ??
-                          throw new ArticleNotFoundException(request.Id);
+            var article = await _context.Articles.SingleOrNotFoundExceptionAsync(request.Id, cancellationToken);
 
             var comments = await _context.Comments
                 .Where(c => c.ArticleId == request.Id)

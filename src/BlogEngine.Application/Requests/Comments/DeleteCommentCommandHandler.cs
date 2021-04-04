@@ -2,6 +2,8 @@
 using System.Threading.Tasks;
 using BlogEngine.Application.Abstractions;
 using BlogEngine.Application.Exceptions;
+using BlogEngine.Application.Extensions;
+using BlogEngine.Domain.Entities;
 using JetBrains.Annotations;
 using MediatR;
 
@@ -21,11 +23,10 @@ namespace BlogEngine.Application.Requests.Comments
             DeleteCommentCommand request,
             CancellationToken cancellationToken)
         {
-            var comment = await _context.Comments.FindAsync(request.Id) ??
-                          throw new CommentNotFoundException(request.Id);
+            var comment = await _context.Comments.SingleOrNotFoundExceptionAsync(request.Id, cancellationToken);
 
             if (comment.ArticleId != request.ArticleId)
-                throw new CommentNotFoundException(request.Id);
+                throw new EntityNotFoundException<Comment>(request.Id);
 
             _context.Comments.Remove(comment);
 

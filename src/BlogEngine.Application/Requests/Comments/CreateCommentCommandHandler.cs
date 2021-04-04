@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using BlogEngine.Application.Abstractions;
-using BlogEngine.Application.Exceptions;
+using BlogEngine.Application.Extensions;
 using BlogEngine.Domain.Entities;
 using JetBrains.Annotations;
 using MediatR;
@@ -23,8 +23,7 @@ namespace BlogEngine.Application.Requests.Comments
             CreateCommentCommand request,
             CancellationToken cancellationToken)
         {
-            var article = await _context.Articles.FindAsync(request.ArticleId) ??
-                          throw new ArticleNotFoundException(request.ArticleId);
+            var article = await _context.Articles.SingleOrNotFoundExceptionAsync(request.ArticleId, cancellationToken);
 
             var comment = new Comment
             {
