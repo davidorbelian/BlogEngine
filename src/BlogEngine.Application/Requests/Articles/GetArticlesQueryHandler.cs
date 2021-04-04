@@ -2,6 +2,7 @@
 using System.Threading;
 using System.Threading.Tasks;
 using BlogEngine.Application.Abstractions;
+using BlogEngine.Application.Extensions;
 using BlogEngine.Domain.Entities;
 using JetBrains.Annotations;
 using MediatR;
@@ -25,6 +26,7 @@ namespace BlogEngine.Application.Requests.Articles
         {
             return await _context.Articles
                 .Include(a => a.HashTags)
+                .OrderByCreateTimeDesc()
                 .ToListAsync(cancellationToken);
         }
     }

@@ -4,6 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using BlogEngine.Application.Abstractions;
 using BlogEngine.Application.Exceptions;
+using BlogEngine.Application.Extensions;
 using BlogEngine.Domain.Entities;
 using JetBrains.Annotations;
 using MediatR;
@@ -29,7 +30,10 @@ namespace BlogEngine.Application.Requests.Comments
             if (!await _context.Articles.AnyAsync(a => a.Id == request.ArticleId, cancellationToken))
                 throw new EntityNotFoundException<Article>(request.ArticleId);
 
-            return await _context.Comments.Where(c => c.ArticleId == request.ArticleId).ToListAsync(cancellationToken);
+            return await _context.Comments
+                .Where(c => c.ArticleId == request.ArticleId)
+                .OrderByCreateTimeDesc()
+                .ToListAsync(cancellationToken);
         }
     }
 }

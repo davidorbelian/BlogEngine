@@ -18,5 +18,11 @@ namespace BlogEngine.Application.Extensions
             return source.SingleOrDefaultAsync(e => e.Id == id, cancellationToken) ??
                    throw new EntityNotFoundException<TEntity>(id);
         }
+
+        public static IQueryable<TEntity> OrderByCreateTimeDesc<TEntity>(this IQueryable<TEntity> source)
+            where TEntity : Entity
+        {
+            return source.OrderByDescending(e => e.CreateTime);
+        }
     }
 }
