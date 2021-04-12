@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\core\BlogEngine.Application.Core\BlogEngine.Application.Core.csproj" />
+    <ProjectReference Include="..\BlogEngine.Subscriptions.Domain\BlogEngine.Subscriptions.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
