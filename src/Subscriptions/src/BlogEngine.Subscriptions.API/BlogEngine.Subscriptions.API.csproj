@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>daa0d84d-2d51-4000-b8f5-ab86659c107c</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerfileContext>..\..\..\..</DockerfileContext>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\core\BlogEngine.API.Core\BlogEngine.API.Core.csproj" />
+    <ProjectReference Include="..\..\..\..\core\BlogEngine.Messaging.RabbitMq\BlogEngine.Messaging.RabbitMq.csproj" />
+    <ProjectReference Include="..\..\..\Articles\src\BlogEngine.Articles.Events\BlogEngine.Articles.Events.csproj" />
+    <ProjectReference Include="..\BlogEngine.Subscriptions.Application\BlogEngine.Subscriptions.Application.csproj" />
+    <ProjectReference Include="..\BlogEngine.Subscriptions.Infrastructure.Smtp\BlogEngine.Subscriptions.Infrastructure.Smtp.csproj" />
+    <ProjectReference Include="..\BlogEngine.Subscriptions.Infrastructure.SqlServer\BlogEngine.Subscriptions.Infrastructure.SqlServer.csproj" />
+  </ItemGroup>
+
+</Project>

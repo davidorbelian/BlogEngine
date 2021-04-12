@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+
+  articles-api:
+    image: ${DOCKER_REGISTRY-}blogenginearticlesapi
+    build:
+      context: .
+      dockerfile: src/Articles/src/BlogEngine.Articles.API/Dockerfile
+      
+  subscriptions-api:
+    image: ${DOCKER_REGISTRY-}blogenginesubscriptionsapi
+    build:
+      context: .
+      dockerfile: src/Subscriptions/src/BlogEngine.Subscriptions.API/Dockerfile
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+    
+  rabbitmq:
+    image: rabbitmq:3-management-alpine

@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\..\core\BlogEngine.Infrastructure.Core\BlogEngine.Infrastructure.Core.csproj" />
+    <ProjectReference Include="..\BlogEngine.Articles.Application\BlogEngine.Articles.Application.csproj" />
+    <ProjectReference Include="..\BlogEngine.Articles.Domain\BlogEngine.Articles.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\.Common\BlogEngine.Domain.Common\BlogEngine.Domain.Common.csproj" />
+    <ProjectReference Include="..\BlogEngine.Articles.Events\BlogEngine.Articles.Events.csproj" />
+  </ItemGroup>
+
+</Project>
